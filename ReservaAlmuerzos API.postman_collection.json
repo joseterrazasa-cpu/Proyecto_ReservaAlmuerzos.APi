@@ -1,0 +1,145 @@
+{
+	"info": {
+		"_postman_id": "5bcbe489-d446-4f94-948d-62bcf50ed225",
+		"name": "ReservaAlmuerzos API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "47634218"
+	},
+	"item": [
+		{
+			"name": "Crear Reserva",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"fechaReserva\": \"2025-12-10\", \r\n    \"horaSolicitada\": \"13:30:00\",\r\n    \"numeroPersonas\": 3,\r\n    \"clienteId\": null, // Importante: dejar en null para que cree el nuevo cliente\r\n    \r\n    \"nuevoClienteNombre\": \"Ricardo\",\r\n    \"nuevoClienteApellido\": \"Perez\",\r\n    \"nuevoClienteEmail\": \"ricardo.perez@example.com\", // ¡Debe ser un email único para que funcione!\r\n    \"nuevoClienteTelefono\": \"70010020\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7169",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7169"
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Listar todas las Reservas",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7169/api/reservas",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7169",
+					"path": [
+						"api",
+						"reservas"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Obtener Reserva por ID",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
+		},
+		{
+			"name": "Cancelar Reserva",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7169/api/reservas/1",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7169",
+					"path": [
+						"api",
+						"reservas",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Consultar Disponibilidad",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7169/api/disponibilidad/?Fecha=2025-12-10&NumeroPersonas=2",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7169",
+					"path": [
+						"api",
+						"disponibilidad",
+						""
+					],
+					"query": [
+						{
+							"key": "Fecha",
+							"value": "2025-12-10"
+						},
+						{
+							"key": "NumeroPersonas",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": ""
+		}
+	]
+}
