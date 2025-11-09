@@ -1,0 +1,6 @@
+@ReservaAlmuerzos.Api_HostAddress = http://localhost:5155
+
+GET {{ReservaAlmuerzos.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
