@@ -1,0 +1,34 @@
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.deps.json
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.dll
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.pdb
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Core.dll
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Core.pdb
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.csproj.AssemblyReference.cache
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.AssemblyInfoInputs.cache
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.AssemblyInfo.cs
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzo.7456B4C4.Up2Date
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.dll
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\refint\Almuerzos.Infrastructure.dll
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.pdb
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\ref\Almuerzos.Infrastructure.dll
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.runtimeconfig.json
+C:\Tareas U\Tec. WEB\Proyecto\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.genruntimeconfig.cache
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.csproj.AssemblyReference.cache
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.AssemblyInfo.cs
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.dll
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\refint\Almuerzos.Infrastructure.dll
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.pdb
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.deps.json
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.runtimeconfig.json
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.dll
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Infrastructure.pdb
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Core.dll
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\bin\Debug\net9.0\Almuerzos.Core.pdb
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzo.7456B4C4.Up2Date
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\Almuerzos.Infrastructure.genruntimeconfig.cache
+C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Infrastructure\obj\Debug\net9.0\ref\Almuerzos.Infrastructure.dll
