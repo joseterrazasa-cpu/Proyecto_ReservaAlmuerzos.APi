@@ -14,6 +14,7 @@ namespace Almuerzos.Infrastructure.Repositories
     {
         private readonly AlmuerzosDbContext _context;
         private readonly IDbConnectionFactory _connectionFactory;
+        private readonly ISecurityRepository _securityRepository;
         private IDbContextTransaction? _currentTransaction;
 
         // Implementación de las propiedades requeridas por la interfaz
@@ -35,6 +36,9 @@ namespace Almuerzos.Infrastructure.Repositories
             HorarioRepository = new HorarioRepository(_context, _connectionFactory);
             ReservaRepository = new ReservaRepository(_context, _connectionFactory);
         }
+
+        public ISecurityRepository SecurityRepository =>
+            _securityRepository ?? new SecurityRepository(_context);
 
         public void Dispose()
         {

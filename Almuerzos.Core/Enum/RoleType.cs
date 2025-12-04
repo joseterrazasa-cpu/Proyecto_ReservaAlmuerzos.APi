@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Almuerzos.Core.Enum
 {
-    
-    public enum DatabaseProvider
+    public enum RoleType
     {
-        // Por ahora solo usamos SQLServer
-        SqlServer = 1,
-        // MySql = 2,
-        // Oracle = 3
+        Administrator,
+        Consumer
     }
 }

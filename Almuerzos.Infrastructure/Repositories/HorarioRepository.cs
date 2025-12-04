@@ -20,10 +20,10 @@ namespace Almuerzos.Infrastructure.Repositories
             _connectionFactory = connectionFactory;
         }
 
-        // --- Método GET con DAPPER (AJUSTADO) ---
+        
         public async Task<IEnumerable<Horario>> GetHorariosByDay(int diaSemana)
         {
-            // Uso de AS para mapear nombres snake_case de la DB a PascalCase de la Entity
+            
             var sql = @"SELECT 
                             horario_id AS HorarioId, 
                             dia_semana AS DiaSemana, 
@@ -40,10 +40,10 @@ namespace Almuerzos.Infrastructure.Repositories
             }
         }
 
-        // --- Método GET con DAPPER (AJUSTADO) ---
+        
         public async Task<Horario> GetHorarioById(int id)
         {
-            // Uso de AS para mapear nombres snake_case de la DB a PascalCase de la Entity
+            
             var sql = @"SELECT 
                             horario_id AS HorarioId, 
                             dia_semana AS DiaSemana, 

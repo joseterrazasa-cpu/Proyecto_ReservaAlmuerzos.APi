@@ -11,7 +11,7 @@ namespace Almuerzos.Infrastructure.DTOs
     {
         public int CurrentPage { get; set; }
         public int PageSize { get; set; }
-        public int TotalCount { get; set; } // Total de registros que cumplen el filtro
+        public int TotalCount { get; set; } 
         public int TotalPages { get; set; }
 
         public bool HasPreviousPage => CurrentPage > 1;

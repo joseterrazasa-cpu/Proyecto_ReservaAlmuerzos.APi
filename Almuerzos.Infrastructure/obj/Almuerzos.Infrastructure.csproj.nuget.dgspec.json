@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj": {}
+    "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj": {
+    "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj",
+        "projectUniqueName": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj",
         "projectName": "Almuerzos.Core",
-        "projectPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj",
+        "projectPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj",
         "packagesPath": "C:\\Users\\Jose\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Core\\obj\\",
+        "outputPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Core\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -54,6 +54,10 @@
             "AutoMapper.Extensions.Microsoft.DependencyInjection": {
               "target": "Package",
               "version": "[12.0.0, )"
+            },
+            "BCrypt.Net-Core": {
+              "target": "Package",
+              "version": "[1.6.0, )"
             }
           },
           "imports": [
@@ -76,14 +80,14 @@
         }
       }
     },
-    "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj": {
+    "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj",
+        "projectUniqueName": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj",
         "projectName": "Almuerzos.Infrastructure",
-        "projectPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj",
+        "projectPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj",
         "packagesPath": "C:\\Users\\Jose\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\obj\\",
+        "outputPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -105,8 +109,8 @@
           "net9.0": {
             "targetAlias": "net9.0",
             "projectReferences": {
-              "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj": {
-                "projectPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj"
+              "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj": {
+                "projectPath": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Core\\Almuerzos.Core.csproj"
               }
             }
           }

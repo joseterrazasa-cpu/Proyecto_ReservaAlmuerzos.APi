@@ -1,13 +1,14 @@
 {
   "version": 2,
-  "dgSpecHash": "nrTyS0S/ih0=",
+  "dgSpecHash": "127ZdN/xnMw=",
   "success": true,
-  "projectFilePath": "C:\\Users\\Jose\\OneDrive\\Desktop\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj",
+  "projectFilePath": "C:\\Users\\Jose\\OneDrive\\Desktop\\Tec. Web\\ReservaAlmuerzos\\Almuerzos.Infrastructure\\Almuerzos.Infrastructure.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Jose\\.nuget\\packages\\automapper\\15.0.1\\automapper.15.0.1.nupkg.sha512",
     "C:\\Users\\Jose\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",
     "C:\\Users\\Jose\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\Jose\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\Jose\\.nuget\\packages\\bcrypt.net-core\\1.6.0\\bcrypt.net-core.1.6.0.nupkg.sha512",
     "C:\\Users\\Jose\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\Jose\\.nuget\\packages\\fluentvalidation\\11.11.0\\fluentvalidation.11.11.0.nupkg.sha512",
     "C:\\Users\\Jose\\.nuget\\packages\\fluentvalidation.aspnetcore\\11.3.1\\fluentvalidation.aspnetcore.11.3.1.nupkg.sha512",
