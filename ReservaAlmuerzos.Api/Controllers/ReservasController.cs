@@ -1,22 +1,25 @@
 ﻿using Almuerzos.Core.Entities;
 using Almuerzos.Core.Interfaces;
 using Almuerzos.Core.QueryFilters;
-using Almuerzos.Infrastructure.DTOs; // Importamos los DTOs, incluyendo PaginationMetadata
+using Almuerzos.Infrastructure.DTOs;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using ReservaAlmuerzos.Api.Responses; // Importamos nuestro wrapper ApiResponse
+using Microsoft.AspNetCore.Mvc; 
+using ReservaAlmuerzos.Api.Responses;
 using System.Collections.Generic;
 using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
-// IMPORTANTE: Asegúrate de que ReservaDto, CrearReservaDto, y ModificarReservaDto existan en tu proyecto Almuerzos.Infrastructure/DTOs.
+
 
 namespace ReservaAlmuerzos.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")] 
+    [Route("api/v{version:apiVersion}/[controller]")] 
+    [Authorize]
     public class ReservasController : ControllerBase
     {
         private readonly IReservaService _reservaService;
@@ -41,13 +44,13 @@ namespace ReservaAlmuerzos.Api.Controllers
         [ProducesResponseType((int)HttpStatusCode.BadRequest)]
         public async Task<IActionResult> GetReservas([FromQuery] ReservaQueryFilter filters)
         {
-            // 1. Obtener los datos paginados y el conteo total (uso de la tupla)
+            
             var (reservas, totalCount) = await _reservaService.GetReservas(filters);
 
-            // 2. Mapeo a DTOs
+            
             var reservasDto = _mapper.Map<IEnumerable<ReservaDto>>(reservas);
 
-            // 3. Crear metadata de paginación
+            
             var basePath = $"{Request.Scheme}://{Request.Host}{Request.Path.Value}";
             var totalPages = (int)Math.Ceiling((double)totalCount / filters.PageSize);
             var hasPreviousPage = filters.PageNumber > 1;
@@ -68,10 +71,10 @@ namespace ReservaAlmuerzos.Api.Controllers
                     : null
             };
 
-            // 4. Estandarizar la respuesta usando ApiResponse (Requisito 7)
+            
             var response = new ApiResponse<IEnumerable<ReservaDto>>(reservasDto, paginationMetadata);
 
-            // Opcional: Agregar el header X-Pagination
+            
             Response.Headers.Add("X-Pagination", JsonSerializer.Serialize(paginationMetadata));
 
             return Ok(response);
@@ -137,7 +140,20 @@ namespace ReservaAlmuerzos.Api.Controllers
         [HttpPut("{id}")]
         [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<bool>))]
         [ProducesResponseType((int)HttpStatusCode.NotFound)]
-        
+        public async Task<IActionResult> UpdateReserva(int id, [FromBody] ReservaDto reservaDto)
+        {
+            var reserva = _mapper.Map<Reserva>(reservaDto);
+            reserva.ReservaId = id; // Asignar el ID de la ruta
+
+            var resultado = await _reservaService.UpdateReserva(reserva);
+
+            if (resultado)
+            {
+                return Ok(new ApiResponse<bool>(true, "Reserva actualizada exitosamente."));
+            }
+
+            return NotFound(new ApiResponse<bool>(false, $"No se encontró la reserva con ID: {id} para actualizar."));
+        }
 
         /// <summary>
         /// Cancela una reserva existente por su ID. (Requisito 7 y 8)

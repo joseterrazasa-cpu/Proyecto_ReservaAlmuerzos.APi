@@ -2,16 +2,20 @@
 using Almuerzos.Core.Interfaces;
 using Almuerzos.Infrastructure.DTOs;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc; 
 using ReservaAlmuerzos.Api.Responses;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
+
 namespace ReservaAlmuerzos.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")] 
+    [Route("api/v{version:apiVersion}/[controller]")] 
+    [Authorize]
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;

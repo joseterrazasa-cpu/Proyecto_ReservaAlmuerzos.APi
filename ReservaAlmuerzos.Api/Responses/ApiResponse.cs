@@ -12,9 +12,9 @@ namespace ReservaAlmuerzos.Api.Responses
     {
         public T Data { get; set; }
         public string Message { get; set; }
-        public PaginationMetadata Pagination { get; set; } // Necesita el using de Almuerzos.Infrastructure.DTOs
+        public PaginationMetadata Pagination { get; set; } 
 
-        // Constructor para GETs paginados
+        
         public ApiResponse(T data, PaginationMetadata pagination, string message = "Resultados paginados exitosamente.")
         {
             Data = data;
@@ -22,17 +22,17 @@ namespace ReservaAlmuerzos.Api.Responses
             Message = message;
         }
 
-        // Constructor para GETs simples (por ID) y operaciones sin paginación (POST, PUT)
+        
         public ApiResponse(T data, string message = "Operación exitosa.")
         {
             Data = data;
             Message = message;
         }
 
-        // Constructor para respuestas simples (como DELETE o mensajes de error sin data)
+        
         public ApiResponse(string message)
         {
-            Data = default(T); // Data será null o el valor por defecto
+            Data = default(T); 
             Message = message;
         }
     }

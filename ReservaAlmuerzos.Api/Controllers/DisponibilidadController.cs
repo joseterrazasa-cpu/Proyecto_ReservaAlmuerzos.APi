@@ -1,15 +1,20 @@
 ﻿using Almuerzos.Core.Interfaces;
+using Almuerzos.Core.QueryFilters;
 using Almuerzos.Infrastructure.DTOs;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc; 
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Almuerzos.Core.QueryFilters;
+
 
 namespace ReservaAlmuerzos.Api.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
+    [ApiVersion("1.0")] 
+    [Route("api/v{version:apiVersion}/[controller]")] 
+    [Authorize]
     public class DisponibilidadController : ControllerBase
     {
         private readonly IReservaService _reservaService;
@@ -21,12 +26,12 @@ namespace ReservaAlmuerzos.Api.Controllers
             _mapper = mapper;
         }
 
-        
+
         [HttpGet]
-        
+
         public async Task<IActionResult> Get([FromQuery] DisponibilidadDto consulta)
         {
-            
+
             if (consulta.Fecha == System.DateTime.MinValue || consulta.NumeroPersonas <= 0)
             {
                 return BadRequest(new { message = "Se requiere una fecha válida y un número de personas mayor que cero." });
@@ -42,6 +47,8 @@ namespace ReservaAlmuerzos.Api.Controllers
 
             var (reservas, totalCount) = await _reservaService.GetReservas(filter);
 
+            // Nota: Este endpoint parece que intenta obtener Horarios, pero usa GetReservas.
+            // Asumiendo que el mapeo a HorarioDto es correcto para el objetivo de disponibilidad:
             var horariosDto = _mapper.Map<IEnumerable<HorarioDto>>(reservas);
 
             return Ok(horariosDto);
