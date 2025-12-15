@@ -20,7 +20,7 @@ namespace Almuerzos.Infrastructure.Mappings
 
             
             CreateMap<Cliente, ClienteDto>()
-                .ForMember(dest => dest.NombreCompleto, opt => opt.MapFrom(src => $"{src.Nombre} {src.Apellido}"));
+                .ForMember(dest => dest.NombreCompleto, opt => opt.MapFrom(src => $"{src.nombre} {src.apellido}"));
 
             
             CreateMap<Horario, HorarioDto>();
@@ -43,12 +43,12 @@ namespace Almuerzos.Infrastructure.Mappings
 
             
             CreateMap<CrearReservaDto, Reserva>()
-                .ForMember(dest => dest.ClienteId, opt =>
+                .ForMember(dest => dest.cliente_id, opt =>
                 {
                     
                     opt.MapFrom(src => src.ClienteId.HasValue ? src.ClienteId.Value : 0);
                 })
-                .ForMember(dest => dest.Estado, opt => opt.MapFrom(src => "Pendiente"));
+                .ForMember(dest => dest.estado, opt => opt.MapFrom(src => "Pendiente"));
 
             CreateMap<Security, SecurityDto>().ReverseMap();
              

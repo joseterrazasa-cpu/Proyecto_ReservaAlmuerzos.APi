@@ -243,10 +243,10 @@ namespace Almuerzos.Infrastructure.Repositories
         {
             var ocupacion = await _context.Reservas
              .Where(r =>
-              r.HorarioId == horarioId &&
-              r.FechaReserva.Date == date.Date &&
-              r.Estado != "Cancelada")
-             .SumAsync(r => r.NumeroPersonas);
+              r.horario_id == horarioId &&
+              r.fecha_reserva.Date == date.Date &&
+              r.estado != "Cancelada")
+             .SumAsync(r => r.numero_personas);
 
             return ocupacion;
         }

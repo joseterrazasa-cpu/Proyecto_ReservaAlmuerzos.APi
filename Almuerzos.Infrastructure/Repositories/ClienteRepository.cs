@@ -36,7 +36,7 @@ namespace Almuerzos.Infrastructure.Repositories
         public async Task<Cliente> GetClienteByEmail(string email)
         {
             // Mantenemos EF Core
-            return await _context.Clientes.FirstOrDefaultAsync(c => c.Email == email);
+            return await _context.Clientes.FirstOrDefaultAsync(c => c.email == email);
         }
 
         public async Task AddCliente(Cliente cliente)

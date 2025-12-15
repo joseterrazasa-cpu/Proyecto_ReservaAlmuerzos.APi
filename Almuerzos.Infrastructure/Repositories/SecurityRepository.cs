@@ -6,6 +6,7 @@ using Almuerzos.Core.Entities;
 using Almuerzos.Core.Interfaces;
 using Almuerzos.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Almuerzos.Infrastructure.Repositories
@@ -15,9 +16,14 @@ namespace Almuerzos.Infrastructure.Repositories
     /// </summary>
     public class SecurityRepository : ISecurityRepository
     {
-        public SecurityRepository(AlmuerzosDbContext context) { }
+        private readonly AlmuerzosDbContext _context;
+        private readonly DbSet<Security> _entities;
 
-
+        public SecurityRepository(AlmuerzosDbContext context)
+        {
+            _context = context;
+            _entities = _context.Set<Security>();
+        }
 
         /// <summary>
         /// Busca un usuario por su Login (nombre de usuario).
@@ -26,6 +32,12 @@ namespace Almuerzos.Infrastructure.Repositories
         {
 
             return await _entities.FirstOrDefaultAsync(x => x.Login == login);
+        }
+
+        public async Task Add(Security entity)
+        {
+            await _entities.AddAsync(entity);
+            await _context.SaveChangesAsync();
         }
     }
 }
