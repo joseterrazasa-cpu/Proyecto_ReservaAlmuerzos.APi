@@ -143,7 +143,7 @@ namespace ReservaAlmuerzos.Api.Controllers
         public async Task<IActionResult> UpdateReserva(int id, [FromBody] ReservaDto reservaDto)
         {
             var reserva = _mapper.Map<Reserva>(reservaDto);
-            reserva.ReservaId = id; // Asignar el ID de la ruta
+            reserva.reserva_id = id; // Asignar el ID de la ruta
 
             var resultado = await _reservaService.UpdateReserva(reserva);
 

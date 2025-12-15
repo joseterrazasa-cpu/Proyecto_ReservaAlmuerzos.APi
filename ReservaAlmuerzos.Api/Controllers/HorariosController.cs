@@ -103,7 +103,7 @@ namespace ReservaAlmuerzos.Api.Controllers
         public async Task<IActionResult> UpdateHorario(int id, [FromBody] ModificarHorarioDto horarioDto)
         {
             var horario = _mapper.Map<Horario>(horarioDto);
-            horario.HorarioId = id; // Asignar el ID de la ruta
+            horario.horario_id = id; // Asignar el ID de la ruta
 
             var resultado = await _horarioService.UpdateHorario(horario);
 

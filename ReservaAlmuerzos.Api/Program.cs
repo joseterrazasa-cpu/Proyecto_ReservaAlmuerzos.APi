@@ -69,11 +69,15 @@ namespace ReservaAlmuerzos.Api
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<IHorarioRepository, HorarioRepository>();
             builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
+            builder.Services.AddScoped<ISecurityRepository, SecurityRepository>();
             builder.Services.AddScoped<IReservaService, ReservaService>();
             builder.Services.AddScoped<IClienteService, ClienteService>();
             builder.Services.AddScoped<IHorarioService, HorarioService>();
-
+            builder.Services.AddScoped<ISecurityService, SecurityService>();
             
+
+
+
             builder.Services.AddSingleton<IPasswordService, PasswordService>();
             
             builder.Services.AddApiVersioning(options =>

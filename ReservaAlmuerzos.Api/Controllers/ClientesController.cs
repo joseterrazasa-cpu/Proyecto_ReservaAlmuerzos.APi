@@ -104,7 +104,7 @@ namespace ReservaAlmuerzos.Api.Controllers
         public async Task<IActionResult> UpdateCliente(int id, [FromBody] ModificarClienteDto clienteDto)
         {
             var cliente = _mapper.Map<Cliente>(clienteDto);
-            cliente.ClienteId = id; // Asignar el ID de la ruta
+            cliente.cliente_id = id; // Asignar el ID de la ruta
 
             var resultado = await _clienteService.UpdateCliente(cliente);
 
