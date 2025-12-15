@@ -8,14 +8,14 @@ namespace Almuerzos.Core.Entities
 {
     public class Reserva
     {
-        public int ReservaId { get; set; } 
-        public int ClienteId { get; set; } 
-        public int HorarioId { get; set; } 
-        public DateTime FechaReserva { get; set; } 
-        public TimeSpan HoraSolicitada { get; set; } 
-        public int NumeroPersonas { get; set; } 
-        public string Estado { get; set; } = "Pendiente"; 
-        public DateTime FechaCreacion { get; set; } = DateTime.Now; 
+        public int reserva_id { get; set; } 
+        public int cliente_id { get; set; } 
+        public int horario_id { get; set; } 
+        public DateTime fecha_reserva { get; set; } 
+        public TimeSpan hora_solicitada { get; set; } 
+        public int numero_personas { get; set; } 
+        public string estado { get; set; } = "Pendiente"; 
+        public DateTime fecha_creacion { get; set; } = DateTime.Now; 
 
         
         public Cliente Cliente { get; set; } 

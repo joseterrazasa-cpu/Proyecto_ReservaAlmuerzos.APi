@@ -22,3 +22,15 @@ C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\
 C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\refint\Almuerzos.Core.dll
 C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.pdb
 C:\Users\Jose\OneDrive\Desktop\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\ref\Almuerzos.Core.dll
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.csproj.AssemblyReference.cache
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.AssemblyInfoInputs.cache
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.AssemblyInfo.cs
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.csproj.CoreCompileInputs.cache
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.dll
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\refint\Almuerzos.Core.dll
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\Almuerzos.Core.pdb
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\bin\Debug\net9.0\Almuerzos.Core.deps.json
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\bin\Debug\net9.0\Almuerzos.Core.dll
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\bin\Debug\net9.0\Almuerzos.Core.pdb
+C:\Users\Jose\OneDrive\Desktop\Tec. Web\ReservaAlmuerzos\Almuerzos.Core\obj\Debug\net9.0\ref\Almuerzos.Core.dll

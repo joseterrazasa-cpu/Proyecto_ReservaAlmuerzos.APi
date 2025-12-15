@@ -20,8 +20,7 @@ namespace Almuerzos.Core.Services
 
         public async Task<IEnumerable<Cliente>> GetClientes()
         {
-            // Fix: IClienteRepository does not have GetClientes, so implement using available methods.
-            // If you have a method to get all clientes, use it. Otherwise, you need to add it to IClienteRepository.
+            
             throw new NotImplementedException("IClienteRepository does not define GetClientes. Implement this method in the repository interface and its implementation.");
         }
 
@@ -32,11 +31,11 @@ namespace Almuerzos.Core.Services
 
         public async Task<bool> AddCliente(Cliente cliente)
         {
-            // Lógica de negocio: Evitar clientes duplicados por email
-            var clienteExistente = await _unitOfWork.Clientes.GetClienteByEmail(cliente.Email);
+            
+            var clienteExistente = await _unitOfWork.Clientes.GetClienteByEmail(cliente.email);
             if (clienteExistente != null)
             {
-                throw new BusinessException($"Ya existe un cliente registrado con el email: {cliente.Email}");
+                throw new BusinessException($"Ya existe un cliente registrado con el email: {cliente.email}");
             }
 
             await _unitOfWork.Clientes.AddCliente(cliente);
@@ -46,25 +45,25 @@ namespace Almuerzos.Core.Services
 
         public async Task<bool> UpdateCliente(Cliente cliente)
         {
-            // 1. Verificar si el cliente existe
-            var clienteActual = await _unitOfWork.Clientes.GetCliente(cliente.ClienteId);
+            
+            var clienteActual = await _unitOfWork.Clientes.GetCliente(cliente.cliente_id);
             if (clienteActual == null)
             {
-                return false; // No se encontró el cliente
+                return false; 
             }
 
-            // 2. Verificar si el email ya está en uso por otro cliente
-            var clienteExistente = await _unitOfWork.Clientes.GetClienteByEmail(cliente.Email);
-            if (clienteExistente != null && clienteExistente.ClienteId != cliente.ClienteId)
+            
+            var clienteExistente = await _unitOfWork.Clientes.GetClienteByEmail(cliente.email);
+            if (clienteExistente != null && clienteExistente.cliente_id != cliente.cliente_id)
             {
-                throw new BusinessException($"El email {cliente.Email} ya está asociado a otro cliente.");
+                throw new BusinessException($"El email {cliente.email} ya está asociado a otro cliente.");
             }
 
-            // Actualizar solo las propiedades que pueden cambiar
-            clienteActual.Nombre = cliente.Nombre;
-            clienteActual.Apellido = cliente.Apellido;
-            clienteActual.Email = cliente.Email;
-            clienteActual.Telefono = cliente.Telefono;
+            
+            clienteActual.nombre = cliente.nombre;
+            clienteActual.apellido = cliente.apellido;
+            clienteActual.email = cliente.email;
+            clienteActual.telefono = cliente.telefono;
 
             _unitOfWork.Clientes.UpdateCliente(clienteActual);
             await _unitOfWork.SaveChangesAsync();
@@ -73,7 +72,7 @@ namespace Almuerzos.Core.Services
 
         public async Task<bool> DeleteCliente(int id)
         {
-            // Lógica de negocio: No permitir eliminar si tiene reservas activas (simplificado por ahora, solo elimina)
+            
             var resultado = await _unitOfWork.Clientes.DeleteCliente(id);
             await _unitOfWork.SaveChangesAsync();
             return resultado;

@@ -15,23 +15,23 @@ namespace Almuerzos.Infrastructure.Configurations
         {
             builder.ToTable("Clientes"); 
 
-            builder.HasKey(c => c.ClienteId); 
+            builder.HasKey(c => c.cliente_id); 
 
-            builder.Property(c => c.Nombre)
+            builder.Property(c => c.nombre)
                 .IsRequired() 
                 .HasMaxLength(100);
 
-            builder.Property(c => c.Apellido)
+            builder.Property(c => c.apellido)
                 .HasMaxLength(100);
 
-            builder.Property(c => c.Email)
+            builder.Property(c => c.email)
                 .IsRequired() 
                 .HasMaxLength(150);
 
             
-            builder.HasIndex(c => c.Email).IsUnique();
+            builder.HasIndex(c => c.email).IsUnique();
 
-            builder.Property(c => c.Telefono)
+            builder.Property(c => c.telefono)
                 .HasMaxLength(20);
         }
     }

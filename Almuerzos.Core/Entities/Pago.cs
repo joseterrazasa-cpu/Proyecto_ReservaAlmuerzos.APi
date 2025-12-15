@@ -8,12 +8,12 @@ namespace Almuerzos.Core.Entities
 {
     public class Pago
     {
-        public int PagoId { get; set; } 
-        public int ReservaId { get; set; } 
-        public decimal Monto { get; set; } 
-        public string MetodoPago { get; set; } 
-        public string EstadoPago { get; set; } 
-        public DateTime FechaPago { get; set; } 
+        public int pago_id { get; set; } 
+        public int reserva_id { get; set; } 
+        public decimal monto { get; set; } 
+        public string metodo_pago { get; set; } 
+        public string estado_pago { get; set; } 
+        public DateTime fecha_pago { get; set; } 
 
         
         public Reserva Reserva { get; set; } 

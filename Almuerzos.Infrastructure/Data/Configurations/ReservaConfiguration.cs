@@ -15,9 +15,9 @@ namespace Almuerzos.Infrastructure.Configurations
         {
             builder.ToTable("Reservas"); 
 
-            builder.HasKey(r => r.ReservaId); 
+            builder.HasKey(r => r.reserva_id); 
 
-            builder.Property(r => r.Estado)
+            builder.Property(r => r.estado)
                 .IsRequired() 
                 .HasMaxLength(50)
                 .HasDefaultValue("Pendiente"); 
@@ -28,19 +28,19 @@ namespace Almuerzos.Infrastructure.Configurations
             
             builder.HasOne<Cliente>()
                 .WithMany()
-                .HasForeignKey(r => r.ClienteId)
+                .HasForeignKey(r => r.cliente_id)
                 .HasConstraintName("FK_Reserva_Cliente")
                 .IsRequired();
 
             
             builder.HasOne<Horario>()
                 .WithMany()
-                .HasForeignKey(r => r.HorarioId)
+                .HasForeignKey(r => r.horario_id)
                 .HasConstraintName("FK_Reserva_Horario")
                 .IsRequired();
 
             // Configuración de la hora solicitada
-            builder.Property(r => r.HoraSolicitada)
+            builder.Property(r => r.hora_solicitada)
                 .HasColumnType("TIME");
         }
     }

@@ -23,4 +23,8 @@
     <ProjectReference Include="..\Almuerzos.Core\Almuerzos.Core.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Context\" />
+  </ItemGroup>
+
 </Project>
