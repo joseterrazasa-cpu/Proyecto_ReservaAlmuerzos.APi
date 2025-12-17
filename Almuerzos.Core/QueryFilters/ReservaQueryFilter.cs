@@ -17,6 +17,6 @@ namespace Almuerzos.Core.QueryFilters
         public int? ClienteId { get; set; }
         public DateTime? FechaDesde { get; set; }
         public DateTime? FechaHasta { get; set; }
-        public string Estado { get; set; } // Ejemplo: "Confirmada", "Pendiente", "Cancelada"
+        public string? Estado { get; set; } // Ejemplo: "Confirmada", "Pendiente", "Cancelada"
     }
 }

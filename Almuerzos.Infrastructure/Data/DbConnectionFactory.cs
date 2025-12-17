@@ -1,31 +1,34 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data;
+using Almuerzos.Core.Enum;
 using Almuerzos.Core.Interfaces;
-using Almuerzos.Core.Enum; // Agregamos el using
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
-using System.Data;
 
 namespace Almuerzos.Infrastructure.Data
 {
-    // Implementación de la factoría que crea una conexión SQL Server.
     public class DbConnectionFactory : IDbConnectionFactory
     {
         private readonly string _connectionString;
 
-        // Propiedad requerida por la interfaz, indica que esta fábrica es para SQL Server.
         public DatabaseProvider Provider => DatabaseProvider.SqlServer;
 
-        // Inyectamos IConfiguration para obtener el ConnectionString
         public DbConnectionFactory(IConfiguration configuration)
         {
-            _connectionString = configuration.GetConnectionString("DefaultConnection");
+            // Intentar nombres comunes y usar fallback claro
+            _connectionString = configuration.GetConnectionString("ConnectionSqlServer")
+                                ?? configuration.GetConnectionString("DefaultConnection");
+
+            if (string.IsNullOrWhiteSpace(_connectionString))
+            {
+                // Mensaje claro para debugging en lugar del error críptico de SqlConnection.Open()
+                throw new InvalidOperationException(
+                    "No se encontró ninguna cadena de conexión válida. " +
+                    "Agrega 'ConnectionStrings:ConnectionSqlServer' o 'ConnectionStrings:DefaultConnection' en appsettings.json / User Secrets / variables de entorno."
+                );
+            }
         }
 
-        // Crea y devuelve una nueva conexión abierta de SQL Server.
         public IDbConnection CreateConnection()
         {
             var connection = new SqlConnection(_connectionString);

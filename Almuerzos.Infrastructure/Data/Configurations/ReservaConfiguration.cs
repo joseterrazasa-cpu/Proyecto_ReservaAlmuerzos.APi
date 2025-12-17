@@ -13,35 +13,25 @@ namespace Almuerzos.Infrastructure.Configurations
     {
         public void Configure(EntityTypeBuilder<Reserva> builder)
         {
-            builder.ToTable("Reservas"); 
+            builder.ToTable("Reservas");
 
-            builder.HasKey(r => r.ReservaId); 
+            builder.HasKey(r => r.reserva_id);
 
-            builder.Property(r => r.Estado)
-                .IsRequired() 
-                .HasMaxLength(50)
-                .HasDefaultValue("Pendiente"); 
+            builder.Property(r => r.fecha_reserva).IsRequired();
+            builder.Property(r => r.hora_solicitada).IsRequired();
+            builder.Property(r => r.numero_personas).IsRequired();
+            builder.Property(r => r.estado).HasMaxLength(50).IsRequired();
+            builder.Property(r => r.fecha_creacion).IsRequired();
 
-             
-            builder.ToTable(t => t.HasCheckConstraint("CHK_NumeroPersonas", "numero_personas > 0"));
+            builder.HasOne(r => r.Cliente)
+                .WithMany(c => c.Reservas)
+                .HasForeignKey(r => r.cliente_id)
+                .HasConstraintName("FK_Reservas_Clientes");
 
-            
-            builder.HasOne<Cliente>()
-                .WithMany()
-                .HasForeignKey(r => r.ClienteId)
-                .HasConstraintName("FK_Reserva_Cliente")
-                .IsRequired();
-
-            
-            builder.HasOne<Horario>()
-                .WithMany()
-                .HasForeignKey(r => r.HorarioId)
-                .HasConstraintName("FK_Reserva_Horario")
-                .IsRequired();
-
-            // Configuración de la hora solicitada
-            builder.Property(r => r.HoraSolicitada)
-                .HasColumnType("TIME");
+            builder.HasOne(r => r.Horario)
+                .WithMany(h => h.Reservas)
+                .HasForeignKey(r => r.horario_id)
+                .HasConstraintName("FK_Reservas_Horarios");
         }
     }
 }

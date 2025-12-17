@@ -10,12 +10,10 @@ namespace Almuerzos.Core.Interfaces
 {
     public interface IReservaRepository
     {
-        // Modificado para aceptar el objeto de filtro/paginación
-        // Retorna solo la página de Reservas.
         Task<IEnumerable<Reserva>> GetReservas(ReservaQueryFilter filters); 
 
         
-        // Nuevo método para obtener el conteo total de registros (necesario para la paginación)
+        
         Task<int> GetTotalCount(ReservaQueryFilter filters);
 
         Task<Reserva> GetReserva(int id);
@@ -23,5 +21,6 @@ namespace Almuerzos.Core.Interfaces
         Task<bool> UpdateReserva(Reserva reserva);
         Task<bool> DeleteReserva(int id);
         Task<int> GetReservasCountByHorarioAndDate(int horarioId, DateTime date);
+        Task<IEnumerable<(string Estado, int ClienteId, string NombreCliente, int TotalReservas)>> GetTopClientePorEstado();
     }
 }

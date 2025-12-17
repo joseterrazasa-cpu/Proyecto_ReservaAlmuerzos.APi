@@ -8,11 +8,11 @@ namespace Almuerzos.Core.Entities
 {
     public class DetallePedido
     {
-        public int DetalleId { get; set; } 
-        public int ReservaId { get; set; } 
-        public int PlatoId { get; set; } 
-        public int Cantidad { get; set; } 
-        public decimal PrecioUnitario { get; set; } 
+        public int detalle_id { get; set; } 
+        public int reserva_id { get; set; } 
+        public int plato_id { get; set; } 
+        public int cantidad { get; set; } 
+        public decimal precio_unitario { get; set; } 
         public Reserva Reserva { get; set; } 
         public Plato Plato { get; set; } 
     }

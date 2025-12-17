@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Almuerzos.Core.Enum
 {
-    // Define los tipos de bases de datos que la aplicación puede usar.
+    
     public enum DatabaseProvider
     {
         // Por ahora solo usamos SQLServer

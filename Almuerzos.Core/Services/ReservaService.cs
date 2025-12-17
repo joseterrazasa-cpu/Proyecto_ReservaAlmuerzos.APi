@@ -5,6 +5,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Almuerzos.Infrastructure.DTOs;
+
 
 namespace Almuerzos.Core.Services
 {
@@ -20,16 +22,16 @@ namespace Almuerzos.Core.Services
         // 1. Corregido: Tipo de retorno Task<bool>
         public async Task<Reserva> CrearReserva(Reserva nuevaReserva)
         {
-            nuevaReserva.FechaCreacion = DateTime.Now;
-            nuevaReserva.Estado = "Pendiente";
+            nuevaReserva.fecha_creacion = DateTime.Now;
+            nuevaReserva.estado = "Pendiente";
 
-            await _unitOfWork.Reservas.AddReserva(nuevaReserva); // Cambiado de Add a AddReserva
-            await _unitOfWork.SaveChangesAsync(); // Guardar cambios
+            await _unitOfWork.Reservas.AddReserva(nuevaReserva); 
+            await _unitOfWork.SaveChangesAsync(); 
 
             return nuevaReserva;
         }
 
-        // 2. Implementación de Paginación y Filtros usando el Repositorio
+        
         public async Task<(IEnumerable<Reserva> Reservas, int TotalCount)> GetReservas(ReservaQueryFilter filters)
         {
             var reservas = await _unitOfWork.Reservas.GetReservas(filters);
@@ -54,37 +56,61 @@ namespace Almuerzos.Core.Services
             var reserva = await _unitOfWork.Reservas.GetReserva(id);
             if (reserva == null) return false;
 
-            reserva.Estado = "Cancelada";
+            reserva.estado = "Cancelada";
             var result = await _unitOfWork.Reservas.UpdateReserva(reserva);
             await _unitOfWork.SaveChangesAsync();
 
             return result;
         }
 
-        // 3. Método de lógica de negocio (Consultar Disponibilidad)
+        
         public async Task<IEnumerable<Horario>> ConsultarDisponibilidad(DateTime fecha, int numeroPersonas)
         {
-            // 1. Obtener el día de la semana (por ejemplo, Lunes, Martes, etc.)
+            
             var diaSemana = fecha.DayOfWeek.ToString();
 
-            // 2. Obtener todos los horarios disponibles para ese día
+            
             var horarios = await _unitOfWork.Horarios.GetHorariosByDay(fecha.DayOfWeek.GetHashCode());
 
             var horariosDisponibles = new List<Horario>();
 
             foreach (var horario in horarios)
             {
-                // 3. Contar el número de personas ya reservadas para ese horario y fecha (usando el método específico)
-                var ocupacionActual = await _unitOfWork.Reservas.GetReservasCountByHorarioAndDate(horario.HorarioId, fecha);
+                
+                var ocupacionActual = await _unitOfWork.Reservas.GetReservasCountByHorarioAndDate(horario.horario_id, fecha);
 
-                // 4. Calcular si hay capacidad
-                if (horario.CapacidadMaxima - ocupacionActual >= numeroPersonas)
+                
+                if (horario.capacidad_maxima - ocupacionActual >= numeroPersonas)
                 {
                     horariosDisponibles.Add(horario);
                 }
             }
 
             return horariosDisponibles;
+        }
+        
+        public async Task<IEnumerable<(string Estado, Cliente Cliente, int TotalReservas)>> GetTopClientePorEstado()
+        {
+            // Obtenemos la información agregada del repositorio (ya incluye ClienteId y NombreCliente)
+            var data = await _unitOfWork.Reservas.GetTopClientePorEstado();
+
+            // Construimos objetos Cliente ligeros con los datos ya disponibles en 'data'
+            // Evitamos llamar a _unitOfWork.Clientes.GetCliente para no abrir una conexión por cada elemento.
+            var result = data
+                .Select(item => (
+                    Estado: item.Estado,
+                    Cliente: new Cliente
+                    {
+                        // Propiedades usadas por el controlador: cliente_id y nombre.
+                        // Si tu entidad usa nombres diferentes, ajusta aquí.
+                        cliente_id = item.ClienteId,
+                        nombre = item.NombreCliente
+                    },
+                    TotalReservas: item.TotalReservas
+                ))
+                .ToList();
+
+            return result;
         }
     }
 }
