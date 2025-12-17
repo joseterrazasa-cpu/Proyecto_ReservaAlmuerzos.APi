@@ -1,17 +1,23 @@
-using FluentValidation;
-using Microsoft.EntityFrameworkCore;
 using Almuerzos.Core.Interfaces;
 using Almuerzos.Core.Services;
 using Almuerzos.Infrastructure.Data;
-using Almuerzos.Infrastructure.Repositories;
-using Almuerzos.Infrastructure.Mappings;
-using Almuerzos.Infrastructure.Validators;
 using Almuerzos.Infrastructure.Filters;
-using ReservaAlmuerzos.Api.Middlewares; // Para el Global Exception Middleware
-using Microsoft.OpenApi.Models; // Para la configuración de Swagger
+using Almuerzos.Infrastructure.Mappings;
+using Almuerzos.Infrastructure.Repositories;
+using Almuerzos.Infrastructure.Validators;
+using FluentValidation;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
+using ReservaAlmuerzos.Api.Middlewares;
 using System.Reflection;
-using System.IO;
-
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
+using Almuerzos.Core.CustomEntities; 
+using Microsoft.Extensions.DependencyInjection; 
 namespace ReservaAlmuerzos.Api
 {
     public class Program
@@ -20,7 +26,32 @@ namespace ReservaAlmuerzos.Api
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            
+            builder.Configuration.Sources.Clear();
+            builder.Configuration
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Configuration.AddUserSecrets<Program>();
+                Console.WriteLine("User Secrets habilitados para desarrollo");
+            }
+
+            
+            builder.Configuration.AddEnvironmentVariables();
+
+
+            
+            if (builder.Environment.IsDevelopment())
+            {
+                builder.Configuration.AddUserSecrets<Program>();
+            }
+            
+
             #region Configurar el Contexto de Base de Datos
+            
             var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
 
             builder.Services.AddDbContext<AlmuerzosDbContext>(options => options.UseSqlServer(connectionString));
@@ -28,24 +59,47 @@ namespace ReservaAlmuerzos.Api
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
 
-            // --- INYECCIÓN DE DEPENDENCIAS ---
+            
+            builder.Services.Configure<PasswordOptions>
+                (builder.Configuration.GetSection("PasswordOptions"));
 
-            // Dapper Connection Factory
+            
             builder.Services.AddSingleton<IDbConnectionFactory, DbConnectionFactory>();
-
-            // Unit of Work
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-
-            // Repositorios
             builder.Services.AddScoped<IClienteRepository, ClienteRepository>();
             builder.Services.AddScoped<IHorarioRepository, HorarioRepository>();
             builder.Services.AddScoped<IReservaRepository, ReservaRepository>();
-
-            // Servicios de Lógica de Negocio (Core Services)
+            builder.Services.AddScoped<ISecurityRepository, SecurityRepository>();
             builder.Services.AddScoped<IReservaService, ReservaService>();
             builder.Services.AddScoped<IClienteService, ClienteService>();
             builder.Services.AddScoped<IHorarioService, HorarioService>();
-            // ------------------------------------
+            builder.Services.AddScoped<ISecurityService, SecurityService>();
+            
+
+
+
+            builder.Services.AddSingleton<IPasswordService, PasswordService>();
+            
+            builder.Services.AddApiVersioning(options =>
+            {
+                options.ReportApiVersions = true;
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+
+                options.ApiVersionReader = ApiVersionReader.Combine(
+                    new UrlSegmentApiVersionReader(),
+                    new HeaderApiVersionReader("x-api-version"),
+                    new QueryStringApiVersionReader("api-version")
+                );
+            });
+
+            
+            builder.Services.AddVersionedApiExplorer(options =>
+            {
+                options.GroupNameFormat = "'v'VVV";
+                options.SubstituteApiVersionInUrl = true;
+            });
+            
 
             builder.Services.AddControllers().AddNewtonsoftJson(options =>
             {
@@ -57,18 +111,14 @@ namespace ReservaAlmuerzos.Api
 
             builder.Services.AddControllers(options =>
             {
-                // Se agrega el filtro de validación global que usa FluentValidation
                 options.Filters.Add<ValidationFilter>();
             });
 
-            // --- INYECCIÓN DE VALIDATORES DE FLUENTVALIDATION ---
-            // Esta línea escanea todo el ensamblado (Almuerzos.Infrastructure) en busca de 
-            // clases que hereden de AbstractValidator (como CrearReservaDtoValidator, 
-            // CrearClienteDtoValidator y CrearHorarioDtoValidator) y las registra automáticamente.
             builder.Services.AddValidatorsFromAssemblyContaining<CrearReservaDtoValidator>();
-            // ---------------------------------------------------
 
             builder.Services.AddEndpointsApiExplorer();
+
+
 
             // --- CONFIGURACIÓN DE SWAGGER ---
             var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -76,17 +126,23 @@ namespace ReservaAlmuerzos.Api
 
             builder.Services.AddSwaggerGen(options =>
             {
-                options.SwaggerDoc("v1", new OpenApiInfo
+                
+                var apiVersionDescriptionProvider = builder.Services.BuildServiceProvider().GetRequiredService<IApiVersionDescriptionProvider>();
+
+                foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
                 {
-                    Title = "Reserva Almuerzos API",
-                    Version = "v1",
-                    Description = "API para la gestión de reservas de almuerzos, clientes y horarios.",
-                    Contact = new()
+                    options.SwaggerDoc(description.GroupName, new OpenApiInfo
                     {
-                        Name = "Equipo de Desarrollo UCB",
-                        Email = "desarrollo@ucb.edu.bo"
-                    }
-                });
+                        Title = $"Reserva Almuerzos API {description.ApiVersion}",
+                        Version = description.ApiVersion.ToString(),
+                        Description = "API para la gestión de reservas de almuerzos, clientes y horarios.",
+                        Contact = new()
+                        {
+                            Name = "Equipo de Desarrollo UCB",
+                            Email = "desarrollo@ucb.edu.bo"
+                        }
+                    });
+                }
 
                 if (File.Exists(xmlPath))
                 {
@@ -97,9 +153,37 @@ namespace ReservaAlmuerzos.Api
             });
             // --- FIN DE LA CONFIGURACIÓN DE SWAGGER ---
 
+
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme =
+                    JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters =
+                    new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = builder.Configuration["Authentication:Issuer"],
+                        ValidAudience = builder.Configuration["Authentication:Audience"],
+                        IssuerSigningKey = new SymmetricSecurityKey(
+                            System.Text.Encoding.UTF8.GetBytes(
+                                builder.Configuration["Authentication:SecretKey"]
+                            )
+                        )
+                    };
+            });
+
+
+
             var app = builder.Build();
 
-            // Registro del Middleware Global de Excepciones
             app.UseMiddleware<GlobalExceptionMiddleware>();
 
             if (app.Environment.IsDevelopment())
@@ -107,12 +191,24 @@ namespace ReservaAlmuerzos.Api
                 app.UseSwagger();
                 app.UseSwaggerUI(options =>
                 {
-                    options.SwaggerEndpoint("/swagger/v1/swagger.json", "Reserva Almuerzos API v1");
+                    
+                    var apiVersionDescriptionProvider = app.Services.CreateScope().ServiceProvider.GetRequiredService<IApiVersionDescriptionProvider>();
+                    foreach (var description in apiVersionDescriptionProvider.ApiVersionDescriptions)
+                    {
+                        options.SwaggerEndpoint($"/swagger/{description.GroupName}/swagger.json", description.GroupName.ToUpperInvariant());
+                    }
+
                     options.RoutePrefix = string.Empty;
                 });
             }
 
+
             app.UseHttpsRedirection();
+
+
+            app.UseHttpsRedirection();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

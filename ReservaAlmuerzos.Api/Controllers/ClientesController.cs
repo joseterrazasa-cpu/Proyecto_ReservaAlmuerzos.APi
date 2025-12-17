@@ -2,16 +2,20 @@
 using Almuerzos.Core.Interfaces;
 using Almuerzos.Infrastructure.DTOs;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc; 
 using ReservaAlmuerzos.Api.Responses;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 
+
 namespace ReservaAlmuerzos.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")] 
+    [Route("api/v{version:apiVersion}/[controller]")] 
+    
     public class ClientesController : ControllerBase
     {
         private readonly IClienteService _clienteService;
@@ -100,7 +104,7 @@ namespace ReservaAlmuerzos.Api.Controllers
         public async Task<IActionResult> UpdateCliente(int id, [FromBody] ModificarClienteDto clienteDto)
         {
             var cliente = _mapper.Map<Cliente>(clienteDto);
-            cliente.ClienteId = id; // Asignar el ID de la ruta
+            cliente.cliente_id = id; 
 
             var resultado = await _clienteService.UpdateCliente(cliente);
 
@@ -132,6 +136,28 @@ namespace ReservaAlmuerzos.Api.Controllers
             }
 
             return NotFound(new ApiResponse<bool>(false, $"No se encontró el cliente con ID: {id} para eliminar."));
+        }
+
+        /// <summary>
+        /// Obtiene el top de clientes por estado basado en sus reservas.
+        /// </summary>
+        /// <param name="reservaService">Servicio de reservas.</param>
+        /// <returns>Un listado de clientes con más reservas por estado.</returns>
+        /// <response code="200">Devuelve el top de clientes por estado.</response>
+        [HttpGet("top-cliente-por-estado")]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ApiResponse<IEnumerable<ClienteReservasPorEstadoDto>>))]
+        public async Task<IActionResult> GetTopClientePorEstado([FromServices] IReservaService reservaService)
+        {
+            var data = await reservaService.GetTopClientePorEstado();
+            var dto = data.Select(x => new ClienteReservasPorEstadoDto
+            {
+                Estado = x.Estado,
+                ClienteId = x.Cliente.cliente_id,    
+                NombreCliente = x.Cliente.nombre,   
+                TotalReservas = x.TotalReservas
+            });
+
+            return Ok(new ApiResponse<IEnumerable<ClienteReservasPorEstadoDto>>(dto, "Usuario con más reservas por estado."));
         }
     }
 }

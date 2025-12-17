@@ -2,16 +2,19 @@
 using Almuerzos.Core.Interfaces;
 using Almuerzos.Infrastructure.DTOs;
 using AutoMapper;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc; 
 using ReservaAlmuerzos.Api.Responses;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ReservaAlmuerzos.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [ApiVersion("1.0")] 
+    [Route("api/v{version:apiVersion}/[controller]")] 
+    //[Authorize]
     public class HorariosController : ControllerBase
     {
         private readonly IHorarioService _horarioService;
@@ -100,7 +103,7 @@ namespace ReservaAlmuerzos.Api.Controllers
         public async Task<IActionResult> UpdateHorario(int id, [FromBody] ModificarHorarioDto horarioDto)
         {
             var horario = _mapper.Map<Horario>(horarioDto);
-            horario.HorarioId = id; // Asignar el ID de la ruta
+            horario.horario_id = id; 
 
             var resultado = await _horarioService.UpdateHorario(horario);
 
